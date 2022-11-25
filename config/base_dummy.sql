@@ -44,32 +44,3 @@ INSERT INTO votos VALUES -- votos de prueba para el banneo
     ( 1, 4 ),
     ( 2, 4 ),
     ( 3, 4 );
-
-
-CREATE OR REPLACE VIEW vista_ganadores AS ( 
-
-SELECT
-    IDCEREMONIA,
-    IDCATEGORIA,
-    CATEGORIA,
-    ORDEN,
-    NOMINADO,
-    MAX(TOTAL) AS TOTAL
-FROM ( 
-    SELECT 
-        c.FKCEREMONIA AS IDCEREMONIA,
-        c.ID AS IDCATEGORIA,
-        c.CATEGORIA,
-        c.ORDEN,
-        n.NOMINADO ,
-        COUNT( * ) AS TOTAL
-    FROM 
-        votos AS v 
-        JOIN usuarios AS u ON u.ID = v.FKUSUARIO 
-        JOIN nominaciones AS n ON n.ID = v.FKNOMINACION
-        JOIN categorias AS c ON c.ID = n.FKCATEGORIA
-    GROUP BY n.ID
-) AS tablita
-GROUP BY IDCATEGORIA
-
-);

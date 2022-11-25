@@ -64,3 +64,32 @@ CREATE TABLE nominaciones(
     CONSTRAINT VOTO_NOMINACION FOREIGN KEY(FKNOMINACION) REFERENCES nominaciones(ID) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY(FKUSUARIO,FKNOMINACION)
  )ENGINE=innoDB;
+
+
+CREATE OR REPLACE VIEW vista_ganadores AS ( 
+
+    SELECT
+        IDCEREMONIA,
+        IDCATEGORIA,
+        CATEGORIA,
+        ORDEN,
+        NOMINADO,
+        MAX(TOTAL) AS TOTAL
+    FROM ( 
+        SELECT 
+            c.FKCEREMONIA AS IDCEREMONIA,
+            c.ID AS IDCATEGORIA,
+            c.CATEGORIA,
+            c.ORDEN,
+            n.NOMINADO ,
+            COUNT( * ) AS TOTAL
+        FROM 
+            votos AS v 
+            JOIN usuarios AS u ON u.ID = v.FKUSUARIO 
+            JOIN nominaciones AS n ON n.ID = v.FKNOMINACION
+            JOIN categorias AS c ON c.ID = n.FKCATEGORIA
+        GROUP BY n.ID
+    ) AS tablita
+    GROUP BY IDCATEGORIA
+
+);
