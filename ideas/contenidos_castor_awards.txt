@@ -1,0 +1,49 @@
+--- Cronograma ---
+11/12 - Abren las nomimaciones
+17/12 - Cierran las nominaciones
+18_19/12 - Depuro listas (quien queda y quien no queda en las ternas)
+20/12 - Abren las votaciones
+31/12 - Cierre de votaciones 
+01-02/01 - Si entras a la web NO deberías ver los resultados aún
+02/01 - Gala (después de esta fecha, se muestran los ganadores)
+
+--- Funcionalidades ---
+01 - Login cerrado (registro/login).
+02 - Recuperar clave
+03 - Cargar las categorias (ternas)
+04 - Postular a los nominados a cada terna (viewer)
+05 - Definir qué nomimados quedan y cuáles no (streamer)
+06 - Votar a los ternados (viewer)
+07 - Definir fechas:
+---- De apertura/cierre de nominaciones
+---- De apertura/cierre de votaciones 
+---- De ver los resultados
+
+
+
+--- Herramientas ---
+Htaccess rutas index.php?cat=votar --> /terna/votar
+Mandar mails por PHPMailer( ) alta / recuperar clave
+Recaptcha V3 alta / login / recuperar clave
+Repo GIT
+
+
+
+--- Flujo de navegacion ---
+Landing que explique de qué es la votación? 
+-> Form registro/login (podrían ser modales - JS) / Si estas logueado pasa al botón de VOTAR/POSTULAR
+---> Nominar candidatos (dentro de las fechas de nominación)
+---> Votar las ternas (dentro de las fechas de votación)
+---> La nada misma (porque estamos fuera de fecha).
+
+
+(footer) Disclaimer con la politica de privacidad (basicamente para qué quiero tu mail a quiénes se los voy a compartir)
+
+
+
+--- BASE DE DATOS ---
+CEREMONIAS (2022/2023/2024)
+USUARIOS (VOTAN Y POSTULAN)
+TERNAS (CATEGORIAS)
+NOMINADOS (LA GENTE QUE SE VA A PODER VOTAR)
+VOTACIONES (QUÉ USUARIO VOTÓ A QUÉ PERSONA)

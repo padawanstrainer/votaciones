@@ -1,0 +1,8 @@
+01. Definir las funcionalidades
+02. Definir el flujo de navegación (vistas)
+03. Diseño (estructura de cajas)
+04. Análisis de qué cosas son dinámicas (storage) y cuáles son estáticas.
+05. Definir el storage (modelo de bdd, estructura de archivos).
+06. Conexión front-back
+07. Definir las cosas que son Javascripteables (ajax/ventanas modales/peticion en tiempo real)
+08. Cosas del server (cron)
