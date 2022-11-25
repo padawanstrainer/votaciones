@@ -46,6 +46,7 @@ INSERT INTO votos VALUES -- votos de prueba para el banneo
     ( 3, 4 );
 
 
+CREATE OR REPLACE VIEW vista_ganadores AS ( 
 
 SELECT
     IDCEREMONIA,
@@ -70,3 +71,5 @@ FROM (
     GROUP BY n.ID
 ) AS tablita
 GROUP BY IDCATEGORIA
+
+);
