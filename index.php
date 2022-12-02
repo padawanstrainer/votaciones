@@ -21,8 +21,6 @@ if(
         $datos_metodo['id'] = $_GET['id'];
     }
 
-    var_dump($datos_metodo);
-
     AdminController::$metodo_admin( $datos_metodo );
 }else if( ! method_exists( $class, $accion ) ){
     $vista = '404.php';
@@ -38,6 +36,8 @@ if(
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/estilos.css" />
+    <!-- todo revisar si el comité internacional de castores estilistas implementados autoriza el uso de picocss en este desarrollo -->
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
     <title>CastorAwards</title>
 </head>
 <body>
@@ -63,7 +63,7 @@ if(
             </ul>
         </nav>
     </header>
-    <main>
+    <main class='container'>
         <?php include "mvc/views/$vista"; ?>
     </main>
 </body>

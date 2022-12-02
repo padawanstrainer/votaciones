@@ -39,4 +39,12 @@ class CategoriasModel{
         $stmt = $cnx->prepare( $c );
         $stmt->execute( [ $id ] );
     }
+
+    public static function getActuales( ){
+        global $cnx;
+        $c = "SELECT cat.ID, CATEGORIA FROM categorias AS cat JOIN ceremonias AS cer ON cer.ID = cat.FKCEREMONIA WHERE cer.CEREMONIA_ACTUAL=1 ORDER BY ORDEN";
+        $s = $cnx->prepare($c);
+        $s->execute( );
+        return $s->fetchAll( );
+    }
 }

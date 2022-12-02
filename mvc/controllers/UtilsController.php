@@ -14,12 +14,28 @@ class UtilsController{
                 $clase = 'AuthController';
             break;
             case 'postular': 
-                $template = 'postular.php';
-                $clase = 'VoteController';
+                $clase = 'PostulacionesController';
+                if( ! AuthController::isLogged() ):
+                    $template = 'forbidden.php';
+                else: 
+                    $template = 'logged/postular.php';
+                endif;
+            break;
+            case 'postulaciones':
+                if( ! AuthController::isLogged() ):
+                    die( header("Location: /") );
+                else: 
+                    self::postRequired( );
+                    PostulacionesController::postular( $_POST );
+                endif;
             break;
             case 'votar':
-                $template = 'votar.php';
                 $clase = 'VoteController';
+                if( ! AuthController::isLogged() ):
+                    $template = 'forbidden.php';
+                else: 
+                    $template = 'logged/votar.php';
+                endif;
             break;
             case 'panel':
                 $clase = 'AdminController';
@@ -76,5 +92,27 @@ class UtilsController{
         if($_SERVER['REQUEST_METHOD'] != 'POST' ){
             die( header("Location: /") );
         }
+    }
+
+    public static function redirectWithMessage( $url, $session = [ ] ){
+        foreach( $session as $key => $value ){
+            $_SESSION[$key] = $value;
+        }
+        die( header("Location: $url") );
+    }
+
+
+    public static function generateRandomPassword( $length = 8 ){
+        $caracteres = str_split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%&$=!@#_-+");
+        $pwd = '';
+        for( $i = 0; $i < $length; $i++ ){
+            $pwd .= $caracteres[ array_rand($caracteres) ];
+        }
+        return $pwd;
+    }
+
+
+    public static function getBaseUrl( ){
+        return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'];
     }
 }

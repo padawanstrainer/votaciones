@@ -14,22 +14,53 @@ class AuthController{
     }
 
     public static function register( $data ){
-        UsuariosModel::find( $data['usuario'], $data['clave'] );
-        #var_dump($data);
-die( );
-        #die( header("Location: /") );
+        $email = $data['usuario'];
+        $rta = UsuariosModel::check( $email );
+        if( $rta ){ //el usuario ya existía, wacho... redirect con mensaje de error
+            UtilsController::redirectWithMessage("/login", [
+                'error_register' => 'Usuario ya registrado'
+            ] );
+        }
+        //si llegué acá, es porque el usuario aún no existe... vamos a crearlo...
+        $clave = UtilsController::generateRandomPassword( );
+
+        $respuesta = UsuariosModel::register($email, sha1($clave));
+        if( ! $respuesta ){
+            UtilsController::redirectWithMessage("/login", [
+                'error_register' => 'Hubo un error registrando el usuario'
+            ] );
+        }
+
+        //MANDAR EL MAIL A LA CUENTA DEL USUARIO
+        $email_params = [
+            'destinatario' => $email,
+            'asunto' => 'Se ha creado tu cuenta!',
+            'cuerpo' => 'registro.html',
+            'valores' => [
+                'USUARIO' => $email,
+                'CLAVE' => $clave
+            ]
+        ];
+        EmailController::send( $email_params );
+
+        UtilsController::redirectWithMessage("/login", [
+            'success_register' => 'Usuario registrado con éxito, ya se puede loguear'
+        ] );
     }
 
     public static function login( $data ){
         $user = UsuariosModel::find( $data['usuario'], $data['clave'] );
         if( ! $user ){
-            $_SESSION['inputs_login'] = $data;
-            $_SESSION['error_login'] = "Usuario o clave incorrecto";
-            die( header("Location: /login") );
+            UtilsController::redirectWithMessage("/login", [
+                'error_login' => 'Usuario o clave incorrecto',
+                'inputs_login' => $data
+            ] );
         }
+
         if( $user['ACTIVO'] == 0 ){
-            $_SESSION['error_login'] = "Cuenta inhabilitada, contacte al admin :)";
-            die( header("Location: /login") );
+            UtilsController::redirectWithMessage("/login", [
+                'error_login' => 'Cuenta inhabilitada, contacte al admin :)'
+            ] );
         }
 
         $_SESSION['USER'] = [
