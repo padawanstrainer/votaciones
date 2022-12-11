@@ -1,4 +1,6 @@
 <?php 
+include_once MVC.DS.'models'.DS.'CeremoniasModel.php';
+
 class UtilsController{
     public static function get_view( $ruta, $metodo ){
         $template = '404.php';
@@ -37,12 +39,23 @@ class UtilsController{
                     $template = 'logged/votar.php';
                 endif;
             break;
+            case 'votaciones':
+                if( ! AuthController::isLogged() ):
+                    die( header("Location: /") );
+                else: 
+                    self::postRequired( );
+                    VoteController::save( $_POST );
+                endif;
+            break;
             case 'panel':
                 $clase = 'AdminController';
                 if( ! AuthController::isAdmin( ) ):
                     $template = 'forbidden.php';
                 else:
                     switch( $metodo ):
+                        case 'ceremonias':
+                            $template = 'panel_ceremonias.php';
+                        break;
                         case 'categorias':
                             $template = 'panel_categorias.php';
                         break;
@@ -114,5 +127,9 @@ class UtilsController{
 
     public static function getBaseUrl( ){
         return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'];
+    }
+
+    public static function getCurrentCeremony( ){
+        return CeremoniasModel::getCurrentCeremony( );
     }
 }

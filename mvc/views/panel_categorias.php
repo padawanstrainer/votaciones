@@ -1,5 +1,5 @@
 <?php 
-require MVC.'/models/CeremoniasModel.php';
+include_once MVC.'/models/CeremoniasModel.php';
 
 $sub_accion = $_GET['subaccion'] ?? 'listado';
 

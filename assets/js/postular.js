@@ -18,7 +18,8 @@ const agregar_fila = function( e ){
         type: 'text',
         name: `candidato[${filas}]`,
         placeholder: 'Nombre del candidato',
-        required: true
+        required: true,
+        autocomplete: 'off'
     } );
     const div_cbox = D.create('div', {
         className: 'form-group'

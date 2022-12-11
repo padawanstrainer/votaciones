@@ -65,7 +65,8 @@ class AuthController{
 
         $_SESSION['USER'] = [
             'ID' => $user['ID'],
-            'ADMIN' => $user['ES_ADMIN']
+            'ADMIN' => $user['ES_ADMIN'],
+            'USERNAME' => $user['USERNAME']
         ];
 
         die( header("Location: /") );

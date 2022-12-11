@@ -1,7 +1,6 @@
 <h2>Agregá candidatos a las categorías del CastorAwards</h2>
 
 <form method="post" action="/postulaciones">
-
     <button type="button" id="agregar_candidato">Otro candidato más</button>
     <button type="submit">Enviar postulaciones</button>
 </form>

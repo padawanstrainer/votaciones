@@ -3,6 +3,7 @@ require 'config/php/setup.php';
 require 'config/php/autoload.php';
 require 'config/php/funciones.php';
 
+$ceremonia_actual = UtilsController::getCurrentCeremony( );
 $recursos = UtilsController::get_view( $categoria, $accion );
 $vista = $recursos['tpl'];
 $class = $recursos['class'];
@@ -36,8 +37,6 @@ if(
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/estilos.css" />
-    <!-- todo revisar si el comité internacional de castores estilistas implementados autoriza el uso de picocss en este desarrollo -->
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
     <title>CastorAwards</title>
 </head>
 <body>
@@ -47,10 +46,19 @@ if(
             <ul>
                 <li><a href='/'>Home</a></li>
                 <!-- este link en particular, va a cambiar según el contexto -->
-                <?php if( AuthController::isLogged( ) ): ?>
+                <?php if( AuthController::isLogged( ) ): 
+                    if( $ceremonia_actual['NOMINACIONES_ACTIVAS'] == 1 ){
+                ?>
                     <li><a href='/postular'>Postular</a></li>
+                <?php 
+                    }
+
+                    if( $ceremonia_actual['VOTACIONES_ACTIVAS'] == 1 ){
+                ?>
                     <li><a href='/votar'>Votar</a></li>
-                <?php else: ?>
+                <?php 
+                    };
+                    else: ?>
                     <li><a href='/login'>Login</a></li>
                 <?php endif; ?>
                 <!-- este link es solo para el admin -->
@@ -58,7 +66,7 @@ if(
                     <li><a href='/panel'>Panel de control</a></li>
                 <?php endif; ?>
                 <?php if( AuthController::isLogged( ) ): ?>
-                    <li><a href='/logout'>Salir</a></li>
+                    <li><a href='/logout'>Salir (<?php echo $_SESSION['USER']['USERNAME']; ?>)</a></li>
                 <?php endif; ?>
             </ul>
         </nav>

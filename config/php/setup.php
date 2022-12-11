@@ -10,6 +10,7 @@ define( 'DS', DIRECTORY_SEPARATOR );
 define( 'DEV', true );
 define( 'ROOT', dirname(__DIR__, 2) );
 define( 'MVC', ROOT.DS.'mvc' );
+define( 'IMG_WIDTH', 200 );
  
 try{ 
     $cnx = new PDO( $dsn, $usuario, $clave, [
