@@ -1,3 +1,4 @@
+<section>
 <?php 
 $subaccion =  $_GET['subaccion'] ?? 'listado';
 
@@ -12,3 +13,5 @@ switch( $subaccion ){
         include( MVC.'/views/panel/postulaciones/listado.php');
     break;
 }
+?>
+</section>

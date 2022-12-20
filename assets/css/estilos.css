@@ -1,0 +1,472 @@
+:root{
+    --green: #24494d;
+    --brown: #232020;
+    --brownie: #987b66;
+    --brownkk: #7f3c21;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background: #f3f3f3;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    color: var(--green);
+}
+
+h1, h2, h3{
+    font-weight: normal;
+    font-family: headings;
+}
+
+.fakin-border-bottom-for-the-header{
+    filter: drop-shadow(0 5px 0 var(--brownkk) );
+}
+
+.collapsed{
+    --header-background-size-v: calc( 100% - 50px );
+    --header-background-pos-v: 40px;
+    --header-font-size-span: 25px;
+    --header-font-size-h1: 60px;
+    --header-text-width: auto;
+    --header-text-margin: calc( ( ( 100vw - 1280px ) / 2 ) + 200px );
+}
+
+.big{
+    --header-background-size-v: 70%;
+    --header-background-pos-v: 60px;
+    --header-font-size-span: 36px;
+    --header-font-size-h1: 100px;
+    --header-text-width: 50vw;
+    --header-text-margin: auto;
+}
+
+header{
+    background: var(--brownie) url(../images/CastorConTraje.png) calc( ( 100vw - 1280px ) / 2 ) var(--header-background-pos-v)/auto var(--header-background-size-v) no-repeat;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+}
+
+.collapsed header{
+    padding-bottom: 30px;
+}
+
+.big header{
+    padding-bottom: 200px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 68% 85%, 0 100% );
+}
+
+header *{
+    order: 2;
+}
+
+header h1{
+    font-size: var(--header-font-size-h1);
+    margin: .3em 0 0;
+    color: #ffeeee;
+    text-shadow: 3px 3px 0 black;
+}
+
+header h1,
+header span{
+    width: var(--header-text-width);
+    margin-left: var(--header-text-margin);
+}
+
+header span{
+    color: #232020;
+    font-size: var(--header-font-size-span);
+}
+
+header nav{
+    order: 1;
+    background: var(--brown);
+}
+
+header nav ul{
+    display: flex;
+   justify-content: flex-end;
+}
+
+header nav ul li:not( :last-child )::after{
+    content: ' | ';
+    color: white;
+}
+
+header nav ul a{
+    color: white;
+    display: inline-block;
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+
+
+main h1,
+main h2{
+    font-size: 38px;
+    text-align: center;
+    color: var(--green);
+}
+
+footer,
+main > *{
+    padding: 6vh calc( (100vw - 1200px) / 2 );
+    line-height: 1.75em;
+}
+
+main > :nth-child(2){
+    background: var(--green);
+}
+
+main > :nth-child(2) h2{
+    color: white;
+}
+
+main > :nth-child(2) p{
+    color: #679599;
+}
+
+article p{
+    color: #101010;
+}
+
+ol{
+    margin: 20px 0;
+    padding: 20px 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 40%);
+    justify-content: space-between;
+    counter-set: numeritos 0;
+    list-style: none;
+    background: url(./iconos/ternados.jpg) center center/contain no-repeat;
+    font-size: 20px;
+}
+
+ol li::before{
+    content: counter(numeritos);
+    position: absolute;
+    left: -45px;
+    top: 0;
+    background: white;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    color: var(--green);
+    font-family: headings;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ol li{
+    counter-increment: numeritos;
+    color: wheat;
+    position: relative;
+    margin-bottom: 1.5em;
+}
+
+ol li:nth-child(even){
+    text-align: right;
+}
+
+ol li:nth-child(even)::before{
+    left: auto;
+    right: -45px;
+}
+
+
+footer{
+    background: var(--brown);
+    color: #9a9a9a;
+    columns: 2;
+    font-size: .9em;
+}
+
+
+.fecha div{
+    padding-top: 20px;
+    display: flex;
+}
+
+.fecha p{
+    margin-top: 0;
+    width: 66%;
+}
+
+.fecha div::after{
+    content: '';
+    flex: 1;
+    background:url(./iconos/represa.png) center top/contain no-repeat;
+    min-height: 300px;
+}
+
+.registro-login{
+    display: flex;
+    position: relative;
+}
+
+.registro-login::after{
+    content: '';
+    background: var(--green) url(./iconos/ternados.jpg) center/auto 90% no-repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    transition: right .23s ease-in-out;
+}
+
+
+.registro-login.ver-registro::after{
+    right: 50%;
+}
+
+.registro-login form{
+    flex: 1;
+    background: #ffffff;
+    padding: 5vh 2vw;
+}
+
+:where( .registro-login ) form div{
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.registro-login form div span,
+.registro-login form div label{
+    color: var(--green);
+    font-size: 20px;
+}
+
+.registro-login form div input{
+    font-size: 18px;
+    padding: 2vh 2vw;
+    font-size: inherit;
+    border: 1px solid #666666;
+    border-radius: 6px;
+}
+
+form .buttons{
+    margin-top: 130px;
+    flex-direction: row;
+    gap: 10px;
+}
+
+form .buttons button{
+    padding: .75em 3em;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+}
+
+form .buttons button[type=submit]{
+    background: #5e864a;
+}
+form .buttons button[type=button]{
+    background: #677576;
+}
+
+.form-postulaciones .form-row{
+    background: white;
+    box-shadow: 0 0 5px rgba(0,0,0,.6);
+    padding: 2em 4em;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.form-postulaciones .form-group{
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+}
+
+.form-postulaciones .form-group.form-group-top{
+    align-items: flex-start;
+}
+
+#generated-inputs :only-child a{
+    display: none;
+}
+
+.form-postulaciones .form-row a{
+    background: url(./iconos/close.png) center/contain no-repeat;
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 0;
+}
+
+.form-postulaciones .form-group span{
+    width: 240px;
+    font-size: 1.2em;
+}
+
+.form-postulaciones .form-group span + *{
+    flex: 1;
+}
+
+.form-postulaciones .form-group span + input{
+    padding: .75em 2em;
+    border-radius: .5em;
+    border: 1px solid #666666;
+}
+
+.form-postulaciones .form-group input[type=checkbox]{
+    display: none;
+}
+
+.form-postulaciones .form-group input[type=checkbox] + label{
+    display: inline-block;
+    padding: .5em 1em;
+    border: 1px solid #a2a3a3;
+    margin-right: 6px;
+    font-size: .8em;
+    line-height: 1em;
+    border-radius: 6px;
+    color: #a2a3a3;
+}
+
+.form-postulaciones .form-group input[type=checkbox]:checked + label{
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+}
+
+.section-votaciones,
+.form-votaciones{
+    counter-set: numeritos 0;
+}
+
+.section-votaciones > div,
+.form-votaciones fieldset{
+    counter-increment: numeritos;
+    border: none;
+    background: white;
+    position: relative;
+    margin-bottom: 2em;
+    display: grid;
+    padding: 3.5em 2em 1em 2em;
+    gap: 15px 9px;
+    grid-template-columns: repeat(3, 1fr);
+    box-shadow: 0 0 5px rgba(0,0,0,.4);
+}
+
+.section-votaciones > div{
+    display: block;
+}
+
+.section-votaciones > div ul{
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px 9px;
+}
+
+.section-votaciones > div:nth-child(even),
+.form-votaciones fieldset:nth-child(even){
+    background: #679599;
+    color: white;
+}
+
+.section-votaciones > div h3,
+.form-votaciones fieldset legend{
+    font-family: headings;
+    position: absolute;
+    top: .5em;
+    left: 1em;
+    font-size: 20px;
+}
+
+.form-votaciones fieldset div input[type=radio]{
+    display: none;
+}
+/*
+txt1 4d392c
+txt2 03373b
+div 679599
+*/
+.form-votaciones fieldset div label{
+    display: flex;
+    flex-direction: column;
+    color: #03373b;
+    font-size: 1.2em;
+    align-items: flex-start;
+    background: url(./iconos/check_no.png) left 3px no-repeat;
+    padding-left: 30px;
+}
+
+.form-votaciones fieldset div input[type=radio]:checked + label{
+    color: #4d392c;
+    background-image: url(./iconos/check_si.png);
+}
+
+.section-votaciones > div h3::before,
+.form-votaciones fieldset legend::before{
+    content: counter(numeritos) ' ' ;
+}
+
+.section-votaciones > div ul img,
+.form-votaciones fieldset div label img{
+    max-width: 95%;
+    filter: grayscale(1)
+}
+
+.section-votaciones > div ul li:not(.seleccionado){
+    opacity: 0.25;
+}
+
+
+.section-votaciones > div ul span{
+    display: none;
+}
+
+.form-votaciones fieldset div input[type=radio]:checked + label img{
+    filter: grayscale(0);
+}
+.form-votaciones .buttons,
+.form-postulaciones .buttons{
+    display: flex;
+    margin-top: 40px;
+    justify-content: flex-end;
+}
+
+.subtitle{
+    font-size: 20px;
+    color: #232020;
+    line-height: 1.5em;
+    width: 70%;
+    margin: 1em auto 3em;
+    text-align: center;
+}
+
+
+.legend{
+    font-size: .9em;
+}
+
+.error{
+    color: #8d0000;
+    background: #ffeeee;
+    font-size: 13px;
+    padding: .35em 1em;
+}
+

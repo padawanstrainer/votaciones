@@ -1,3 +1,4 @@
+<section class='ceremonias'>
 <?php 
 $sub_accion = $_GET['subaccion'] ?? 'listado';
 
@@ -14,5 +15,9 @@ switch( $sub_accion ){
     case 'listado':
         include( MVC.'/views/panel/ceremonias/listado.php');
     break;
+    case 'ordenar':
+        include( MVC.'/views/panel/ceremonias/ordenar.php');
+    break;
 }
 ?>
+</section>

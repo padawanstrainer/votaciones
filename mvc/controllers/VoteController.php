@@ -3,9 +3,11 @@ require_once MVC.DS.'models'.DS.'VotosModel.php';
 
 class VoteController{
     public static function index( ){
-        $total_votos = VotosModel::can_vote( $_SESSION['USER']['ID'] );
-
-        $nominados = VotosModel::votaciones( $_SESSION['USER']['ID'] );
+        $id_usuario = isset( $_SESSION['USER'] ) ? 
+                            $_SESSION['USER']['ID'] :
+                            0;
+        $total_votos = VotosModel::can_vote( $id_usuario );
+        $nominados = VotosModel::votaciones( $id_usuario );
         
         return [
             'already_voted' => (int) $total_votos['TOTAL'] > 0,

@@ -6,6 +6,10 @@
         <input type="text" name="nombre" required autocomplete="off" />
     </div>
     <div>
+        <span>Fecha Ceremonia</span>
+        <input type="date" name="ceremonia_fecha" />
+    </div>
+    <div>
         <span>Inicio nominaciones</span>
         <input type="date" name="nominaciones_inicio" />
     </div>

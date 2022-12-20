@@ -1,11 +1,17 @@
 <?php 
 
 class CategoriasModel{
-    public static function all( ){
+    public static function all( $array = [] ){
         global $cnx;
-        $consulta = "SELECT cat.ID, cat.CATEGORIA, cat.ORDEN, cer.NOMBRE as CEREMONIA FROM categorias AS cat JOIN ceremonias AS cer ON cer.ID = cat.FKCEREMONIA ORDER BY CEREMONIA_ACTUAL DESC, FKCEREMONIA DESC, ORDEN ASC";
+
+        $where = isset($array['where']) ?  "WHERE $array[where]" : '';
+        $order = $array['order'] ?? 'CEREMONIA_ACTUAL DESC, FKCEREMONIA DESC, ORDEN ASC';
+        $vars = $array['vars'] ?? NULL;
+
+        $consulta = "SELECT cat.ID, cat.CATEGORIA, cat.ORDEN, cer.NOMBRE as CEREMONIA FROM categorias AS cat JOIN ceremonias AS cer ON cer.ID = cat.FKCEREMONIA $where ORDER BY $order";
+
         $stmt = $cnx->prepare( $consulta );
-        $stmt->execute( );
+        $stmt->execute( $vars );
         $categorias = $stmt->fetchAll( );
 
         return $categorias;
@@ -21,9 +27,19 @@ class CategoriasModel{
 
     public static function insert( $datos ){
         global $cnx;
-        $c = "INSERT INTO categorias SET CATEGORIA=?, ORDEN=1, FKCEREMONIA=?";
+        $c = <<<SQL
+        INSERT INTO categorias 
+        SET 
+            CATEGORIA=?,
+            ORDEN=(
+                SELECT IFNULL( MAX(c.ORDEN), -1) + 1 
+                FROM categorias AS c
+                WHERE c.FKCEREMONIA = ? 
+            ), 
+            FKCEREMONIA=?
+        SQL;
         $stmt = $cnx->prepare( $c );
-        $stmt->execute( [ $datos['categoria'], $datos['ceremonia'] ] );
+        $stmt->execute( [ $datos['categoria'], $datos['ceremonia'], $datos['ceremonia'] ] );
     }
 
     public static function update( $datos ){
@@ -35,9 +51,25 @@ class CategoriasModel{
 
     public static function delete( $id ){
         global $cnx;
+        $c1 = "SELECT FKCEREMONIA FROM categorias WHERE ID = ? LIMIT 1";
+        $stmt = $cnx->prepare( $c1 );
+        $stmt->execute( [ $id ] );
+        $datos = $stmt->fetch( );
+        $id_ceremonia = $datos['FKCEREMONIA'];
+
+
         $c = "DELETE FROM categorias WHERE ID= ? LIMIT 1";
         $stmt = $cnx->prepare( $c );
         $stmt->execute( [ $id ] );
+
+        //NECESITO REORDENAR LOS NUMERITOS DEL ORDEN
+        $c2 = "SELECT ID FROM categorias WHERE FKCEREMONIA = ? ORDER BY ORDEN";
+        $stmt = $cnx->prepare( $c2 );
+        $stmt->execute( [ $id_ceremonia ] );
+        $categorias = $stmt->fetchAll( );
+        foreach($categorias as $orden => $cat ){
+            CeremoniasModel::reordenar( $orden, $cat['ID'], $id_ceremonia );
+        }
     }
 
     public static function getActuales( ){

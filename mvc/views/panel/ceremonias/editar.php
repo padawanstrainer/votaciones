@@ -6,6 +6,10 @@
         <input type="text" name="nombre" value="<?php echo $ceremonia['NOMBRE']; ?>" />
     </div>
     <div>
+        <span>Fecha Ceremonia</span>
+        <input type="date" name="ceremonia_fecha" value="<?php echo $ceremonia['FECHA_CEREMONIA']; ?>" />
+    </div>
+    <div>
         <span>Inicio nominaciones</span>
         <input type="date" name="nominaciones_inicio" value="<?php echo $ceremonia['FECHA_NOMINACIONES_INICIO']; ?>" />
     </div>

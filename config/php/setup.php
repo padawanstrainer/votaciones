@@ -23,3 +23,5 @@ try{
 $categoria = $_GET['cat'] ?? 'home'; 
 $accion = $_GET['accion'] ?? 'index';
 $subaccion = $_GET['subaccion'] ?? NULL;
+
+$headerClass = $categoria == 'home' ? 'big' : 'collapsed';

@@ -26,6 +26,45 @@ class AdminController{
         die( header( "Location: /panel/ceremonias" ) );
     }
 
+    public static function ceremonias_eliminar( $get ){
+        $id = $get['id'] ?? 0;
+        $rta = CeremoniasModel::delete( $id );
+        if( $rta['error'] ){
+            $_SESSION['ERROR'] = $rta['msg'];
+        }
+        die( header( "Location: /panel/ceremonias" ) );
+    }
+
+    public static function ceremonias_ordenar( $get ){
+        $id = $get['id'] ?? 0;
+        $ceremonia = CeremoniasModel::find( $id );
+        if( ! $ceremonia ){
+            $_SESSION['ERROR'] = 'Ceremonia inexistente';
+            die( header( "Location: /panel/ceremonias" ) );
+        }
+        if( $ceremonia['CANT_CATEGORIAS'] < 2 ){
+            $_SESSION['ERROR'] = 'La ceremonia no tiene suficientes categorias';
+            die( header( "Location: /panel/ceremonias" ) );
+        }
+
+        $categorias = CategoriasModel::all( [
+            'where' => "FKCEREMONIA = ?",
+            'order' => "ORDEN ASC, CATEGORIA ASC",
+            'vars' => [ $id ]
+        ] );
+        $datos = [ 'ceremonia' => $ceremonia, 'categorias' => $categorias ];
+        return $datos;
+    }
+
+
+    public static function ceremonias_orden( $post ){
+        $id_ceremonia = $post['id'];
+        foreach( $post['orden'] as $orden => $id_categoria ){
+            CeremoniasModel::reordenar( $orden, $id_categoria, $id_ceremonia );
+        }
+
+        die( header( "Location: /panel/ceremonias" ) );
+    }
 
     public static function categorias( ){
         $categorias = CategoriasModel::all( );

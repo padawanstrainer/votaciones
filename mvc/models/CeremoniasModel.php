@@ -6,12 +6,14 @@ class CeremoniasModel{
         $c = <<<SQL
         SELECT 
             *, 
+            ID AS ID_CEREMONIA,
             DATE_FORMAT( FECHA_NOMINACIONES_FIN, '%d/%m/%Y' ) AS NOMINACIONES_INICIO,
             DATE_FORMAT( FECHA_NOMINACIONES_INICIO, '%d/%m/%Y' ) AS NOMINACIONES_FIN,
             DATE_FORMAT( FECHA_VOTACIONES_INICIO, '%d/%m/%Y' ) AS VOTACIONES_INICIO,
             DATE_FORMAT( FECHA_VOTACIONES_FIN, '%d/%m/%Y' ) AS VOTACIONES_FIN,
             DATE_FORMAT( FECHA_RESULTADOS_VISIBLES, '%d/%m/%Y' ) AS RESULTADOS_VISIBLES,
-            IF( CEREMONIA_ACTUAL = 1, 'actual', '---' ) AS ACTUAL
+            IF( CEREMONIA_ACTUAL = 1, 'actual', '---' ) AS ACTUAL,
+            ( SELECT COUNT(*) FROM categorias WHERE FKCEREMONIA = ID_CEREMONIA ) AS CANT_CATEGORIAS
         FROM ceremonias
         SQL;
         $st = $cnx->prepare($c);
@@ -24,13 +26,16 @@ class CeremoniasModel{
         $c = <<<SQL
         SELECT
             ID,
+            ID AS ID_CEREMONIA,
             NOMBRE,
             CEREMONIA_ACTUAL,
+            DATE(FECHA_CEREMONIA) AS FECHA_CEREMONIA,
             DATE(FECHA_NOMINACIONES_INICIO) AS FECHA_NOMINACIONES_INICIO,
             DATE(FECHA_NOMINACIONES_FIN) AS FECHA_NOMINACIONES_FIN,
             DATE(FECHA_VOTACIONES_INICIO) AS FECHA_VOTACIONES_INICIO,
             DATE(FECHA_VOTACIONES_FIN) AS FECHA_VOTACIONES_FIN,
-            FECHA_RESULTADOS_VISIBLES
+            FECHA_RESULTADOS_VISIBLES,
+            ( SELECT COUNT(*) FROM categorias WHERE FKCEREMONIA = ID_CEREMONIA ) AS CANT_CATEGORIAS
         FROM ceremonias
         WHERE ID = ?
         LIMIT 1
@@ -44,16 +49,19 @@ class CeremoniasModel{
         global $cnx;
         $query = <<<SQL
         SELECT 
+            ID AS ID_CEREMONIA,
             NOMBRE,
             FECHA_NOMINACIONES_INICIO,
             FECHA_NOMINACIONES_FIN,
             FECHA_VOTACIONES_INICIO,
             FECHA_VOTACIONES_FIN,
             FECHA_RESULTADOS_VISIBLES,
+            DATE_FORMAT( FECHA_CEREMONIA, '%d/%m/%Y' ) AS FECHA_CEREMONIA_SPA,
             NOW( ) AS HOY,
             IF( NOW( ) BETWEEN FECHA_NOMINACIONES_INICIO AND FECHA_NOMINACIONES_FIN, 1, 0 ) AS NOMINACIONES_ACTIVAS,
             IF( NOW( ) BETWEEN FECHA_VOTACIONES_INICIO AND FECHA_VOTACIONES_FIN, 1, 0 ) AS VOTACIONES_ACTIVAS,
-            IF( NOW( ) > FECHA_RESULTADOS_VISIBLES, 1, 0) AS VER_RESULTADOS
+            IF( NOW( ) > FECHA_RESULTADOS_VISIBLES, 1, 0) AS VER_RESULTADOS,
+            ( SELECT COUNT(*) FROM categorias WHERE FKCEREMONIA = ID_CEREMONIA ) AS CANT_CATEGORIAS
         FROM ceremonias
         WHERE CEREMONIA_ACTUAL = 1
 SQL;
@@ -68,6 +76,7 @@ SQL;
             INSERT INTO ceremonias
             SET 
                 NOMBRE = ?,
+                FECHA_CEREMONIA = ?,
                 FECHA_NOMINACIONES_INICIO = ?,
                 FECHA_NOMINACIONES_FIN = ?,
                 FECHA_VOTACIONES_INICIO = ?,
@@ -78,6 +87,7 @@ SQL;
         $st = $cnx->prepare( $c );
         $st->execute( [
             $d['nombre'],
+            $d['ceremonia_fecha'],
             $d['nominaciones_inicio'],
             $d['nominaciones_fin'],
             $d['votaciones_inicio'],
@@ -93,6 +103,7 @@ SQL;
             UPDATE ceremonias
             SET 
                 NOMBRE = ?,
+                FECHA_CEREMONIA = ?,
                 FECHA_NOMINACIONES_INICIO = ?,
                 FECHA_NOMINACIONES_FIN = ?,
                 FECHA_VOTACIONES_INICIO = ?,
@@ -105,6 +116,7 @@ SQL;
         $st = $cnx->prepare( $c );
         $st->execute( [
             $d['nombre'],
+            $d['ceremonia_fecha'],
             $d['nominaciones_inicio'],
             $d['nominaciones_fin'],
             $d['votaciones_inicio'],
@@ -116,9 +128,25 @@ SQL;
     }
 
     public static function delete( $id ){
-
+        global $cnx;
+        $c = "DELETE FROM ceremonias WHERE ID = ? LIMIT 1";
+        $st = $cnx->prepare($c);
+        $rta_st = $st->execute([$id]);
+        $rta = [ 'error' => false, 'msg' => '' ];
+        if( ! $rta_st ){
+            $rta['error'] = true;
+            $rta['msg'] = getSqlError( $st );
+        }
+        return $rta;
     }
 
+    public static function reordenar( $orden, $id_categoria, $id_ceremonia ){
+        global $cnx;
+        $c = "UPDATE categorias SET ORDEN=? WHERE ID=? AND FKCEREMONIA=? LIMIT 1";
+
+        $st = $cnx->prepare($c);
+        $st->execute( [ $orden, $id_categoria, $id_ceremonia ] );
+    }
     
     public static function removeActual( $id ){
         global $cnx;

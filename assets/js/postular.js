@@ -14,6 +14,9 @@ const agregar_fila = function( e ){
             if( cantidad > 1 ) div_row.remove( );
         }
     } );
+
+    const wrapper_candidato = D.create('div', { className: 'form-group' });
+    const span_candidato = D.create('span', { innerHTML: 'Nombre del candidato' } );
     const input_text = D.create('input', {
         type: 'text',
         name: `candidato[${filas}]`,
@@ -21,9 +24,11 @@ const agregar_fila = function( e ){
         required: true,
         autocomplete: 'off'
     } );
-    const div_cbox = D.create('div', {
-        className: 'form-group'
-    } );
+
+    const wrapper_cbox = D.create('div', { className: 'form-group form-group-top' });
+    const span_cbox = D.create('span', { innerHTML: 'Elegir categorias' } );
+    const div_cbox = D.create('div', { className: 'form-group' } );
+
     categorias.forEach( c => {
         const cbox = D.create('input', {
             type: 'checkbox',
@@ -38,11 +43,15 @@ const agregar_fila = function( e ){
         D.append( [cbox, label], div_cbox );
     } );
 
-    D.append( [ button_delete, input_text, div_cbox ], div_row );
+    D.append( [ span_candidato, input_text ], wrapper_candidato );
+    D.append( [ span_cbox, div_cbox ], wrapper_cbox );
+    D.append( [ button_delete, wrapper_candidato, wrapper_cbox ], div_row );
 
     const btn = e.target;
-    const form = e.target.parentNode;
-    form.insertBefore( div_row, btn );
+    const div_buttons = btn.parentNode; 
+    D.append( div_row, D.id('generated-inputs') );
+    //const form = div_buttons.parentNode;
+    //form.insertBefore( div_row, div_buttons );
 }
 
 btn.addEventListener('click', agregar_fila );

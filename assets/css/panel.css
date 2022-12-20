@@ -1,0 +1,175 @@
+table{
+    margin-top: 30px;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9em;
+    line-height: 120%;
+}
+
+table td,
+table th{
+    border: 1px solid #111;
+    padding: 6px 10px;
+    font-weight: normal;
+}
+
+table th{
+    background: #333;
+    color: white;
+    text-transform: uppercase;
+}
+
+table tr:nth-child(odd) td{
+    background: #ededed;
+}
+
+form{
+    background: white;
+    padding: 2em 4em;
+    box-shadow: 0 0 5px rgba(0,0,0,.4);
+}
+
+form:not(.ordenar-categorias){
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+form > div{
+    display: flex;
+    padding: 4px 0px;
+    align-items: flex-start;
+}
+
+form:not(.ordenar-categorias) > div{
+    width: 48%;
+}
+
+form > div span{
+    width: 100px;
+}
+
+.ceremonias form > div span{
+    width: 170px;
+}
+form.ordenar-categorias > div:not(:last-child){
+    border: 1px solid #ccc;
+    padding: 6px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+}
+form.ordenar-categorias > div,
+form.ordenar-categorias > div button{
+    font-size: 1.2em;
+}
+
+form.ordenar-categorias > div:first-child button.up,
+form.ordenar-categorias > div:nth-last-child(2) button.down{
+    pointer-events: none;
+    opacity: .4;
+}
+
+
+form.ordenar-categorias > div span{
+    flex: 1;
+}
+
+form:not(.ordenar-categorias) > div span + *{
+    flex: 1;
+    border: 1px solid #AAA;
+    padding: 4px 5px;
+    border-radius: 3px;
+    outline: none;
+}
+form > div span + .input-column{
+    padding: 0;
+    border:none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form > div span + .input-column input{
+    border: 1px solid #AAA;
+    padding: 4px 5px;
+    width: 100%;
+    border-radius: 3px;
+    outline: none;
+}
+
+form > div span + .input-column img{
+    margin-top: 10px;
+}
+
+
+form > div [type=checkbox]{
+    display: none;
+}
+
+form > div [type=checkbox] + label{
+    padding: 5px 0 5px 20px;
+    background: url(./iconos/check_no.png) left center/15px no-repeat;
+}
+
+form > div [type=checkbox]:checked + label{
+    background-image: url(./iconos/check_si.png);
+}
+
+form > div:last-child{
+    margin-top: 30px;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+form > div:last-child button{
+    padding: .75em 0;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+    width: 250px;
+}
+
+form > div:last-child button[type=submit]{
+    background: #5e864a;
+}
+form > div:last-child button[type=button]{
+    background: #677576;
+}
+
+.sub-botonera{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.sub-botonera ul{
+    display: flex;
+    gap: 5px;
+    margin-right: auto;
+}
+
+.sub-botonera a{
+    display: block;
+    padding: 4px 10px;
+    background: var(--green);
+    color: white;
+    border-radius: 5px;
+    filter:brightness(1.4);
+    transition: .4s;
+}
+
+.sub-botonera a.alta{
+    background: var(--brownkk);
+}
+
+.sub-botonera a:hover{
+    filter:brightness(1);
+}
+
+.estado_user_banneado td{
+    filter:grayscale(1);
+    color: #333;
+    font-style: italic;
+}

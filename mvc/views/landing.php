@@ -1,10 +1,31 @@
-<h2>Bievenido a los CastorAwards</h2>
-<p>Scratch leg; meow for can opener to feed me plop down in the middle where everybody walks and swat turds around the house for mewl for food at 4am eat half my food and ask for more purr while eating, or flop over. Intrigued by the shower tuxedo cats always looking dapper so dead stare with ears cocked but eat the fat cats food freak human out make funny noise mow mow mow mow mow mow success now attack human.<br />
-Cat snacks. Steal the warm chair right after you get up lick butt and make a weird face instantly break out into full speed gallop across the house for no reason.
-Curl up and sleep on the freshly laundered towels cough. Climb leg lies down a nice warm laptop for me to sit on for dead stare with ears cocked but touch water with paw then recoil in horror. Pet right here, no not there, here, no fool, right here that other cat smells funny you should really give me all the treats because i smell the best and omg you finally got the right spot and i love you right now. Meowing chowing and wowing knock over christmas tree. Thinking longingly about tuna brine chirp at birds. Cat mojo.<br />
-Asdflkjaertvlkjasntvkjn (sits on keyboard) eat all the power cords kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff meow go back to sleep owner brings food and water tries to pet on head, so scratch get sprayed by water because bad cat so purr for no reason. Spit up on light gray carpet instead of adjacent linoleum climb leg step on your keyboard while you're gaming and then turn in a circle.<br />
-Rub face on everything claw at curtains stretch and yawn nibble on tuna ignore human bite human hand so lick face hiss at owner, pee a lot, and meow repeatedly scratch at fence purrrrrr eat muffins and poutine until owner comes back and throwup on your pillow, yet scream at teh bath you call this cat food.<br />
-Scratch at fleas, meow until belly rubs, hide behind curtain when vacuum cleaner is on scratch strangers and poo on owners food drink water out of the faucet yet caticus cuteicus so knock dish off table head butt cant eat out of my own dish run outside as soon as door open or i'm going to lap some water out of my master's cup meow.<br />
-Head nudges walk on car leaving trail of paw prints on hood and windshield and intrigued by the shower, but scratch at fleas, meow until belly rubs, hide behind curtain when vacuum cleaner is on scratch strangers and poo on owners food, curl into a furry donut but chirp at birds.<br />
-Lounge in doorway eat owner's food so run outside as soon as door open or and sometimes switches in french and say "miaou" just because well why not flee in terror at cucumber discovered on floor poop on grasses scratch leg; meow for can opener to feed me. Sit on human if it fits, i sits mewl for food at 4am with tail in the air, howl uncontrollably for no reason, make muffins.<br />
-Climb a tree, wait for a fireman jump to fireman then scratch his face dream about hunting birds try to hold own back foot to clean it but foot reflexively kicks you in face, go into a rage and bite own foot, hard. I could pee on this if i had the energy chase laser.</p>
+<article>
+    <h1>Sobre los CastorAwards</h1>
+    <p>Los CastorAwards son los "premios a la excelencia twitchera", reconociendo a los participantes del Stream de <a href='https://twitch.tv/PadawansTrainer' target='_blank'>PadawansTrainer</a> ya sean viewers, streamers o bots (por si algún día dominan el mundo).<br />
+    Cabe destacar que esta premiación es un chiste interno del stream, aprovechado la excusa para poder explicar el desarrollo de una plataforma de votaciones online que quedó disponible al público en el repositorio <a href='https://github.com/padawanstrainer/votaciones' target="_blank">https://github.com/padawanstrainer/votaciones</a>.<br />
+    Quien necesite hacer una votación en línea y no quiera registrarse en una plataforma a tales efectos puede usar este desarrollo base, adaptando todo lo que considere necesario a sus efectos personales.</p>
+</article>
+
+<section>
+    <h2>Los CasTƟrnados</h2>
+    <p>En estos momentos estamos en la fase de nominaciones, eso significa que cualquier persona registrada puede postular candidatos a las distintas ternas de los Castor Awards. Las categoría de esta ceremonia, son:</p>
+    <ol>
+        <li>Nombre de la terna</li>
+        <li>Nombre de la terna</li>
+        <li>Nombre de la terna</li>
+        <li>Nombre de la terna</li>
+        <li>Nombre de la terna</li>
+        <li>Nombre de la terna</li>
+        <li>Nombre de la terna</li>
+        <li>Nombre de la terna</li>
+        <li>Nombre de la terna</li>
+        <li>Nombre de la terna</li>
+    </ol>
+</section>
+
+<section class='fecha'>
+    <h2>Fecha y lugar de la Ceremonia</h2>
+    <div>
+        <p>La ceremonia será virtual a través de https://twitch.tv/PadawansTrainer y tendrá lugar el día XX de Enero de 2023.<br />
+    No se require confirmar asistencia, pero para participar deberás registarte en esta misma web, por medio de <a href=''>este enlace</a>, solo con tu Email.</p>
+    </div>
+</section>

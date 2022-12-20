@@ -7,7 +7,9 @@ $estados = [
 ?>
 <h2>Auditar postulaciones</h2>
 
-<?php include(MVC.'/views/botonera_admin.php' ); ?>
+<div class="sub-botonera">
+    <?php include(MVC.'/views/botonera_admin.php' ); ?>
+</div>
 
 <table border="1" cellpadding="5" cellspacing="0">
     <thead>
@@ -36,7 +38,7 @@ $estados = [
 
     echo <<<HTML
         <tr class='estado_$activo'>
-            <th>$img_tag</th>
+            <td>$img_tag</td>
             <td>$n[NOMINADO]</td>
             <td>$n[CATEGORIA]</td>
             <td>$n[CEREMONIA]</td>

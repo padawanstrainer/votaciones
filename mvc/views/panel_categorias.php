@@ -1,3 +1,4 @@
+<section>
 <?php 
 include_once MVC.'/models/CeremoniasModel.php';
 
@@ -20,3 +21,4 @@ switch( $sub_accion ){
     break;
 }
 ?>
+</section>
