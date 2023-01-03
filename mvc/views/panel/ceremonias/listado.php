@@ -9,7 +9,7 @@
     <thead>
         <tr>
             <th rowspan="2">Ceremonia</th>
-            <th rowspan="2">Fecha</th>
+            <th rowspan="2">Fecha del Evento</th>
             <th colspan="2">Nominaciones</th>
             <th colspan="2">Votaciones</th>
             <th>Resultados</th>
@@ -37,8 +37,8 @@
                         "";
         echo <<<HTML
         <tr>
-            <td>$c[NOMBRE]</td>
-            <td>$c[FECHA_CEREMONIA]</td>
+            <td><a href='/panel/ceremonias/$c[ID]/ver'>$c[NOMBRE]</a></td>
+            <td>$c[FECHA_CEREMONIA_SPA]</td>
             <td>$c[NOMINACIONES_INICIO]</td>
             <td>$c[NOMINACIONES_FIN]</td>
             <td>$c[VOTACIONES_INICIO]</td>

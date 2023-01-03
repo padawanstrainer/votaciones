@@ -22,7 +22,7 @@
         <input type="date" name="votaciones_inicio" value="<?php echo $ceremonia['FECHA_VOTACIONES_INICIO']; ?>" />
     </div>
     <div>
-        <span>Inicio votaciones</span>
+        <span>Fin votaciones</span>
         <input type="date" name="votaciones_fin" value="<?php echo $ceremonia['FECHA_VOTACIONES_FIN']; ?>" />
     </div>
     <div>

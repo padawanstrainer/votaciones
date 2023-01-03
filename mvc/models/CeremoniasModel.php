@@ -7,6 +7,7 @@ class CeremoniasModel{
         SELECT 
             *, 
             ID AS ID_CEREMONIA,
+            DATE_FORMAT( FECHA_CEREMONIA, '%d/%m/%Y %H:%i' ) AS FECHA_CEREMONIA_SPA,
             DATE_FORMAT( FECHA_NOMINACIONES_FIN, '%d/%m/%Y' ) AS NOMINACIONES_INICIO,
             DATE_FORMAT( FECHA_NOMINACIONES_INICIO, '%d/%m/%Y' ) AS NOMINACIONES_FIN,
             DATE_FORMAT( FECHA_VOTACIONES_INICIO, '%d/%m/%Y' ) AS VOTACIONES_INICIO,
@@ -35,11 +36,27 @@ class CeremoniasModel{
             DATE(FECHA_VOTACIONES_INICIO) AS FECHA_VOTACIONES_INICIO,
             DATE(FECHA_VOTACIONES_FIN) AS FECHA_VOTACIONES_FIN,
             FECHA_RESULTADOS_VISIBLES,
-            ( SELECT COUNT(*) FROM categorias WHERE FKCEREMONIA = ID_CEREMONIA ) AS CANT_CATEGORIAS
+
+            DATE_FORMAT(FECHA_CEREMONIA, '%d-%m-%Y') AS FECHA_CEREMONIA_SPA,
+            DATE_FORMAT(FECHA_NOMINACIONES_INICIO, '%d-%m-%Y') AS FECHA_NOMINACIONES_INICIO_SPA,
+            DATE_FORMAT(FECHA_NOMINACIONES_FIN, '%d-%m-%Y') AS FECHA_NOMINACIONES_FIN_SPA,
+            DATE_FORMAT(FECHA_VOTACIONES_INICIO, '%d-%m-%Y') AS FECHA_VOTACIONES_INICIO_SPA,
+            DATE_FORMAT(FECHA_VOTACIONES_FIN, '%d-%m-%Y') AS FECHA_VOTACIONES_FIN_SPA,
+            DATE_FORMAT(FECHA_RESULTADOS_VISIBLES, '%d-%m-%Y') AS FECHA_RESULTADOS_VISIBLES_SPA,
+
+            ( SELECT COUNT(*) FROM categorias WHERE FKCEREMONIA = ID_CEREMONIA ) AS CANT_CATEGORIAS,
+            ( SELECT  COUNT(DISTINCT (s_v.FKUSUARIO))
+                FROM votos AS s_v 
+                JOIN nominaciones as s_n ON s_n.ID = s_v.FKNOMINACION
+                JOIN categorias as s_c ON s_c.ID = s_n.FKCATEGORIA
+                WHERE s_c.FKCEREMONIA = ID_CEREMONIA
+            ) AS CANT_VOTANTES,
+            ( SELECT COUNT(*) FROM nominaciones as s_n JOIN categorias as s_c ON s_c.ID = s_n.FKCATEGORIA WHERE s_n.ACTIVO = 1 AND s_c.FKCEREMONIA = ID_CEREMONIA
+            ) AS CANT_NOMINADOS
         FROM ceremonias
         WHERE ID = ?
         LIMIT 1
-        SQL;
+SQL;
         $st = $cnx->prepare($c);
         $st->execute( [ $id ] );
         return $st->fetch( );

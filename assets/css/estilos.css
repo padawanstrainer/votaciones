@@ -114,6 +114,9 @@ header nav ul a{
     text-transform: uppercase;
 }
 
+main{
+    min-height: 60vh;
+}
 
 main h1,
 main h2{
@@ -156,7 +159,7 @@ ol{
     font-size: 20px;
 }
 
-ol li::before{
+ol > li::before{
     content: counter(numeritos);
     position: absolute;
     left: -45px;
@@ -172,20 +175,24 @@ ol li::before{
     justify-content: center;
 }
 
-ol li{
+ol > li{
     counter-increment: numeritos;
     color: wheat;
     position: relative;
     margin-bottom: 1.5em;
 }
 
-ol li:nth-child(even){
+ol > li:nth-child(even){
     text-align: right;
 }
 
-ol li:nth-child(even)::before{
+ol > li:nth-child(even)::before{
     left: auto;
     right: -45px;
+}
+
+ol > li b{
+    display: block;
 }
 
 

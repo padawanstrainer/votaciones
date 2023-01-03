@@ -66,4 +66,12 @@ class VotosModel{
         $s = $cnx->prepare($c);
         $s->execute( [$idusuario, $idvoto] );
     }
+
+    public static function highest( $idceremonia ){
+        global $cnx;
+        $c = "SELECT ORDEN, CATEGORIA, NOMINADO, IMAGEN, TOTAL, VOTOS_TOTALES, ROUND( TOTAL * 100 / VOTOS_TOTALES ) AS PORCENTAJE FROM vista_ganadores WHERE IDCEREMONIA = ? ORDER BY ORDEN ASC";
+        $s = $cnx->prepare($c);
+        $s->execute( [ $idceremonia ] );
+        return $s->fetchAll();
+    }
 }

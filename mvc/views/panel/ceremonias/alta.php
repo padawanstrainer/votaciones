@@ -22,7 +22,7 @@
         <input type="date" name="votaciones_inicio" />
     </div>
     <div>
-        <span>Inicio votaciones</span>
+        <span>Fin votaciones</span>
         <input type="date" name="votaciones_fin"  />
     </div>
     <div>

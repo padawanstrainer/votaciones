@@ -173,3 +173,46 @@ form > div:last-child button[type=button]{
     color: #333;
     font-style: italic;
 }
+
+
+.ganadores{
+    display: grid;
+    grid-template-columns: repeat( 2, 1fr );
+    gap: 30px 10px;
+}
+
+.ganadores li{
+    display: flex;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(177,177,177,.35);
+}
+
+.ganadores li p{
+    margin: 0;
+    padding: .5em 1.5em; 
+    /*1em = Tipografica|Grafica 1vez el tamaño de la M (16px) */
+    /*1ex = Tipografica|Grafica 1vez el tamaño de la x (8px) */
+    /* 1vh = Medida de monitor 1% alto del viewport */
+    /* 1vw = Medida de monitor 1% ancho del viewport */
+}
+
+.ganadores li img + p{
+    padding-left: 0;
+}
+
+.ganadores li p b{
+    display: block;
+}
+
+.ganadores li img{
+    margin-right: 20px;
+    height: 4.5em;
+}
+
+.ceremonia-detalles{
+    margin: 2em 0;
+    display: grid;
+    grid-template-columns: repeat( 4, 1fr );
+    gap: 10px;
+    text-align: center;
+}

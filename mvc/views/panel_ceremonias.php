@@ -18,6 +18,12 @@ switch( $sub_accion ){
     case 'ordenar':
         include( MVC.'/views/panel/ceremonias/ordenar.php');
     break;
+    case 'ver':
+        $id = $_GET['id'] ?? 0;
+        $ceremonia = CeremoniasModel::find( $id );
+        $votaciones = VotosModel::highest( $id );
+        include( MVC.'/views/panel/ceremonias/ver.php');
+    break;
 }
 ?>
 </section>

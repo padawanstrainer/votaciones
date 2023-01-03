@@ -7,25 +7,34 @@
 
 <section>
     <h2>Los CasTƟrnados</h2>
-    <p>En estos momentos estamos en la fase de nominaciones, eso significa que cualquier persona registrada puede postular candidatos a las distintas ternas de los Castor Awards. Las categoría de esta ceremonia, son:</p>
+    <p>En estos momentos estamos en la fase de nominaciones, eso significa que cualquier persona registrada puede postular candidatos a las distintas ternas de los Castor Awards. <?php 
+    if( count($datos['ternas']) > 0 ) echo "Las categoría de esta ceremonia, son:";
+    ?></p>
+
+    <?php if( count($datos['ternas']) > 0 ): ?>
     <ol>
-        <li>Nombre de la terna</li>
-        <li>Nombre de la terna</li>
-        <li>Nombre de la terna</li>
-        <li>Nombre de la terna</li>
-        <li>Nombre de la terna</li>
-        <li>Nombre de la terna</li>
-        <li>Nombre de la terna</li>
-        <li>Nombre de la terna</li>
-        <li>Nombre de la terna</li>
-        <li>Nombre de la terna</li>
+        <?php foreach( $datos['ternas'] as $t ):
+        echo "<li>$t[CATEGORIA]";
+        if( $ceremonia_actual['VER_RESULTADOS'] ){
+            echo "<b>Ganador/a:  $t[GANADOR]</b>";
+        }else if( $ceremonia_actual['VOTACIONES_ACTIVAS'] ){
+            $nominados = explode( "|#|", $t['NOMINADOS'] );
+            echo "<ul>";
+            foreach( $nominados as $n ){
+                echo "<li>$n</li>";
+            }
+            echo "</ul>";
+        }
+        echo "</li>";
+        endforeach; ?>
     </ol>
+    <?php endif; ?>
 </section>
 
 <section class='fecha'>
     <h2>Fecha y lugar de la Ceremonia</h2>
     <div>
-        <p>La ceremonia será virtual a través de https://twitch.tv/PadawansTrainer y tendrá lugar el día XX de Enero de 2023.<br />
+        <p>La ceremonia será virtual a través de https://twitch.tv/PadawansTrainer y tendrá lugar el día <?php echo $ceremonia_actual['FECHA_CEREMONIA_SPA']; ?>.<br />
     No se require confirmar asistencia, pero para participar deberás registarte en esta misma web, por medio de <a href=''>este enlace</a>, solo con tu Email.</p>
     </div>
 </section>

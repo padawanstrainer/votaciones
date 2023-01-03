@@ -79,4 +79,25 @@ class CategoriasModel{
         $s->execute( );
         return $s->fetchAll( );
     }
+
+
+    public static function getGrid( ){
+        global $cnx;
+        $c = <<<SQL
+        SELECT
+            cat.ID,
+            CATEGORIA,
+            GROUP_CONCAT( NOMINADO SEPARATOR '|#|' ) AS NOMINADOS,
+            ( SELECT vg.NOMINADO FROM vista_ganadores AS vg WHERE vg.IDCATEGORIA = cat.ID) AS GANADOR
+        FROM categorias AS cat
+        JOIN ceremonias AS cer ON cer.ID = cat.FKCEREMONIA 
+        LEFT JOIN nominaciones AS nom ON nom.FKCATEGORIA = cat.ID AND nom.ACTIVO = 1
+        WHERE cer.CEREMONIA_ACTUAL=1
+        GROUP BY cat.ID
+        ORDER BY ORDEN
+SQL;
+        $s = $cnx->prepare($c);
+        $s->execute( );
+        return $s->fetchAll( );
+    }
 }

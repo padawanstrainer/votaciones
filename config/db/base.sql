@@ -68,29 +68,39 @@ CREATE TABLE nominaciones(
 
 
 CREATE OR REPLACE VIEW vista_ganadores AS ( 
-
     SELECT
         IDCEREMONIA,
         IDCATEGORIA,
         CATEGORIA,
         ORDEN,
         NOMINADO,
-        MAX(TOTAL) AS TOTAL
+        IMAGEN,
+        MAX(TOTAL) AS TOTAL,
+        VOTOS_TOTALES
     FROM ( 
         SELECT 
-            c.FKCEREMONIA AS IDCEREMONIA,
+            n.ID AS IDNOMINADO,
             c.ID AS IDCATEGORIA,
             c.CATEGORIA,
-            c.ORDEN,
-            n.NOMINADO ,
-            COUNT( * ) AS TOTAL
+            c.FKCEREMONIA AS IDCEREMONIA,
+            ORDEN,
+            n.NOMINADO,
+            n.IMAGEN,
+            COUNT( * ) AS TOTAL,
+            ( 
+                SELECT COUNT( * )
+                FROM nominaciones AS sub_n 
+                JOIN votos AS sub_v
+                ON sub_v.FKNOMINACION = sub_n.ID
+                WHERE sub_n.FKCATEGORIA = c.ID
+            ) AS VOTOS_TOTALES
         FROM 
             votos AS v 
             JOIN usuarios AS u ON u.ID = v.FKUSUARIO 
             JOIN nominaciones AS n ON n.ID = v.FKNOMINACION
             JOIN categorias AS c ON c.ID = n.FKCATEGORIA
-        GROUP BY n.ID
+        GROUP BY IDNOMINADO
+        ORDER BY TOTAL DESC
     ) AS tablita
     GROUP BY IDCATEGORIA
-
 );
