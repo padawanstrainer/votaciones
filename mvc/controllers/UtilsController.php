@@ -81,6 +81,12 @@ class UtilsController{
                         self::postRequired( );
                         AuthController::login( $_POST );
                     break;
+                    case 'retrieve':
+                        AuthController::retrieve( $_POST );
+                    break;
+                    case 'confirm':
+                        AuthController::confirmar_clave( $_GET );
+                    break;
                 }
             break;
             case 'logout':

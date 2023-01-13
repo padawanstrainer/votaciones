@@ -12,6 +12,11 @@
                 unset($_SESSION['inputs_login']);
                 unset($_SESSION['error_login']);
             }
+            if( isset( $_SESSION['ok_login'] ) ){
+                echo "<p class='ok'>$_SESSION[ok_login]</p>";
+
+                unset($_SESSION['ok_login']);
+            }
             ?>
             <div>
                 <span>Tu correo electrónico</span>
@@ -27,10 +32,10 @@
                 <button type="submit">Ingresar</button>
                 <button type="button" id="registrar">Registro</button>
             </div>
-            <p class='legend'>¿Olvidaste tu contraseña, wn? <a href='#'>recuperá tu clave</a></p>
+            <p class='legend'>¿Olvidaste tu contraseña, aweonao? <a href='javascript:void(0)' id="recuperar">recuperá tu clave</a></p>
         </form>
 
-        <form method="post" action="/auth/register">
+        <form method="post" action="/auth/register" id="registro">
             <h3>Registrate!</h3>
             <?php 
         
@@ -42,7 +47,7 @@
             <p>Ingresá tu correo electrónico y te va a llegar una clave temporal que después vas a poder cambiar en el panel de usuario, para acceder a la plataforma</p>
             <div>
                 <span>Tu correo electrónico</span>
-                <input type="email" name="usuario" placeholder="usuario@email.com" autocomplete="off" />
+                <input type="email" name="usuario" placeholder="usuario@email.com" autocomplete="off" required />
             </div>
             <div class='buttons'>
                 <button type="submit">Registrarme</button>
