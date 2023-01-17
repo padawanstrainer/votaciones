@@ -1,5 +1,5 @@
 <div>
-    <div class='registro-login'>
+    <div class='registro-login<?php if( isset( $_SESSION['error_register'] ) ){ echo " ver-registro"; } ?>'>
         <form method="post" action="/auth/login">
             <h3>Accede al sistema</h3>
             <?php 

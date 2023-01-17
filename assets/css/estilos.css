@@ -486,3 +486,44 @@ div 679599
     background: #E5F0E3;
 }
 
+
+#modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba( 0,0,0,.8);
+}
+
+
+#modal > *{ 
+    background: white;
+    padding: 20px;
+    width: 80%;
+    margin: 10vh auto;
+    border-radius: .4em;
+    box-shadow: 0 0 10px rgba(0,0,0,.95);
+}
+
+#modal div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#modal div input{
+    padding: .5em 1em;
+    border: 1px solid #AAA;
+    border-radius: .5em;
+    width: 400px;
+}
+
+#modal .buttons{
+    margin-top: 1em;
+}
+
+
+body.noscroll{
+    overflow: hidden;
+}

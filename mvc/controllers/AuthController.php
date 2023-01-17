@@ -15,6 +15,11 @@ class AuthController{
 
     public static function register( $data ){
         $email = $data['usuario'];
+        if( empty($email) ){
+            UtilsController::redirectWithMessage("/login", [
+                'error_register' => 'El email es requerido'
+            ] );
+        }
         $rta = UsuariosModel::check( $email );
         if( $rta ){ //el usuario ya existía, wacho... redirect con mensaje de error
             UtilsController::redirectWithMessage("/login", [

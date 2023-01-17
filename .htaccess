@@ -1,6 +1,14 @@
 RewriteEngine On
 
+<FilesMatch "\.ini$">
+    Allow from %{HTTP_HOST}
+    Deny from all
+    Order deny,allow
+</FilesMatch>
+
 RewriteRule ^([a-z]+)$  index.php?cat=$1
 RewriteRule ^([a-z]+)/([a-z]+)$  index.php?cat=$1&accion=$2 [QSA]
 RewriteRule ^panel/([a-z]+)/([a-z]+)$  index.php?cat=panel&accion=$1&subaccion=$2
 RewriteRule ^panel/([a-z]+)/(\d+)/([a-z]+)$  index.php?cat=panel&accion=$1&id=$2&subaccion=$3
+
+

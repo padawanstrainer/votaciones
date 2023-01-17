@@ -52,6 +52,7 @@ if(
     echo '<link rel="stylesheet" href="/assets/css/panel.css">';
     }
     ?>
+    <script src="/assets/js/dom.js"></script>
     <title>CastorAwards</title>
 </head>
 <body>
@@ -83,6 +84,7 @@ if(
                         <li><a href='/panel'>Panel de control</a></li>
                     <?php endif; ?>
                     <?php if( AuthController::isLogged( ) ): ?>
+                        <li><a href='javascript:void(0)' id="cambiar_pass">Cambiar pass</a></li>
                         <li><a href='/logout'>Salir (<?php echo $_SESSION['USER']['USERNAME']; ?>)</a></li>
                     <?php endif; ?>
                 </ul>
@@ -98,5 +100,6 @@ if(
             Los premios de esta ceremonia son solo nominales</p>
         <p>Los datos de registros y login no se usarná para ninguna otra finalidad más que garantizar el acceso a la plataforma</p>
     </footer>
+    <script src="/assets/js/password.js"></script>
 </body>
 </html>
